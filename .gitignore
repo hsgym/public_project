@@ -1,0 +1,13 @@
+# --- Specific rules for this project ---
+# Exclude legacy test codes
+src/legacy/
+
+# --- General Python rules ---
+# Exclude Python bytecode cache
+**/__pycache__/
+*.py[cod]
+*$py.class
+
+# --- OS generated files ---
+.DS_Store
+Thumbs.db

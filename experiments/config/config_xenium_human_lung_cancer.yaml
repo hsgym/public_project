@@ -1,0 +1,67 @@
+base_config: # 全体で使う情報
+  measurement_type: xenium  # simulation_human_lung_cancer, xenium_lung_cancer, merfish_ileum, merfish_ileum_new_version
+  tissue_type: lung_cancer  # Simulation or lung_cancer
+  width: 4096
+  height: 4096
+
+st_data_load_config: # データ読み込みに使う情報
+  fov: 19
+  input_dir: /work/dataset/Lung_Cancer/xenium/Xenium_V1_humanLung_Cancer_FFPE_outs
+  output_dir: /work/subset_lung_cancer
+
+sc_data_load_config: # 参照データに関する情報
+  preprocessed_type: None
+  ref_path: /work/my_data/reference_lung/tLung/Lung_Cancer_expression_cells_x_genes_tLung*.parquet
+
+marker_selection_config:
+  number_of_markers: 10  # 細胞種毎に選択する
+
+qtree_config: # Q-treeに関する情報    
+  limit_depth: 6
+  assign_thresh: 0.25
+  assign_thresh_lower: 0.4
+  sim_thresh: 0.9
+  neighbor_weight: 0.7
+#  score_margin: 0.5
+#  sim_method: cosine
+
+weight_calculation_config:
+  boundary_threshold_px: 4
+#  neighbor_score_threshold: 0.2
+ # soft_k: 2
+  #alpha: 1.5  # α↑で支配的細胞種を強調，β↑で隣接葉影響を強める
+  #beta: 1.0
+  #min_weight: 0.01    
+
+prior_estimation_config:
+  gmm_sigma_list: [0.5, 1.0, 1.5]   # GMMのσ候補リスト
+  grid_size: 3 # (px) 集約するグリッドのサイズ
+  weight_threshold: 0.1 # 点抽出に使用する最小重み
+ # gene_filter_min_ratio: 0.01 # gene の低頻度フィルタの最小比率
+ # gene_filter_min_count: 5    # gene の低頻度フィルタの最小出現数
+ # global_moran_threshold: 0.05 # グローバルMoran's I閾値
+ # number_of_svgs: 20  # 抽出するSVGの数
+  distance_threshold: 30 # px; 分布のμ間の最低距離＝細胞の最小半径
+ # size_for_minimum_filter: 10  # 近傍の範囲(px)
+
+
+model_config:
+  max_iter: 100
+ # batch_size: 200000
+ # reg_covar: 0.000001
+ # smoothing_alpha: 0.01
+ # entropy_beta: 0.1
+  search_radius: 50.0 # E-stepで考慮する近傍距離(px)
+  distance_threshold: 30.0 # 最大半径（クラスタリング）
+  # スコア計算に使うやつ
+ # lambda_weight: 1.0
+  #lambda_dist: 1.0
+  #scale_T: 1.0
+  # 使うやつ色々
+  #weight_threshold: 0.01 # 点抽出に使用する最小重み
+  #n_jobs: -1 # 並列処理数 (-1で全コア使用)    
+
+save_config:
+  enabled: False
+  phase: None
+  run_name: None

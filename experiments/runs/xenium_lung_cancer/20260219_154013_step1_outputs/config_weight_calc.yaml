@@ -1,0 +1,6 @@
+boundary_threshold_px: 4
+neighbor_score_threshold: 0.2
+soft_k: 2
+alpha: 1.5
+beta: 1.0
+min_weight: 0.01

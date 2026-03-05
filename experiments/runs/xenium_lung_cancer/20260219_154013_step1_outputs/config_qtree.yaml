@@ -1,0 +1,7 @@
+limit_depth: 6
+assign_thresh: 0.25
+assign_thresh_lower: 0.4
+sim_thresh: 0.9
+neighbor_weight: 0.7
+score_margin: 0.5
+sim_method: cosine
